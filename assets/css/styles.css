@@ -20,3 +20,30 @@
 .form-message-label{margin:17px 0}
 .form-disclaimer{font-size:.85rem;color:#556b66;margin-top:12px}
 @media(max-width:650px){.form-grid{grid-template-columns:1fr}}
+
+/* v0.5 — contenido oficial de Nation Tours PTY */
+.brand-intro{background:white;padding:26px 30px;margin:0 0 27px;border:1px solid #eadfc5;border-radius:22px;box-shadow:0 8px 30px rgba(26,45,47,.04)}
+.brand-intro p{font-size:1.08rem;line-height:1.7;max-width:880px;margin:12px 0}
+.feature-pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}
+.feature-pills span{font-size:.85rem;border-radius:99px;padding:9px 13px;background:#f4ead1;color:#54431e;font-weight:700}
+.experience-list{padding-left:1.3rem;line-height:1.8;margin:14px 0 20px}
+.experience-list li{margin-bottom:7px}
+.subheading{font-size:1.2rem;margin-top:21px}
+.fine-note{font-size:.93rem;color:#5f6d6b;margin-top:12px}
+.quick-note{background:#fff7e7;padding:17px 24px;border-radius:15px;margin-top:-12px;margin-bottom:18px;color:#4a493e;border:1px solid #f3d7a1}
+.contact-email{margin-top:22px}
+.contact-email a{text-decoration:underline}
+.tour-tag{display:block;color:#fff8e9;font-size:.88rem;margin:10px 0 16px}
+@media(max-width:720px){.brand-intro{padding:22px 17px}}
+
+/* Nation Tours PTY: improved catalogue and cruise packages */
+.package-grid,.destination-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:28px}
+.package-card,.destination-card{background:#fff;border:1px solid #e6e0cf;border-radius:22px;padding:26px;display:flex;flex-direction:column;align-items:flex-start;gap:14px;min-width:0;box-shadow:0 14px 38px rgba(28,52,60,.06)}
+.package-card h3,.destination-card h2{font-family:Georgia,serif;color:#17343c;font-size:clamp(1.35rem,2vw,1.8rem);line-height:1.15}
+.package-card p,.destination-card p{color:#46565c;line-height:1.6;flex:1}
+.destination-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.destinations-hint{text-align:center;margin:28px 0 10px;color:#315057}
+.destinations-hint a{color:#b75e3f;font-weight:800;text-decoration:underline;text-underline-offset:4px}
+.lang-switch{background:#fff;color:#163842;border:1px solid #e2d8c2;border-radius:100px;padding:11px 15px;font-weight:800;cursor:pointer;min-width:48px}
+@media(max-width:850px){.package-grid,.destination-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.package-grid,.destination-grid{grid-template-columns:1fr}.package-card,.destination-card{padding:22px}.lang-switch{padding:9px 12px}}
