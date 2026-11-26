@@ -1,0 +1,34 @@
+
+name: Actualizar galerias de tours
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'assets/img/tours/**'
+      - 'scripts/generate_tour_manifest.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-gallery:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Generar indice de fotografias
+        run: python3 scripts/generate_tour_manifest.py
+
+      - name: Guardar indice actualizado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/img/tours/manifest.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Actualizar galerias automaticamente"
+            git push
+          fi
