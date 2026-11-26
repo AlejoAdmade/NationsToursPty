@@ -1,8 +1,28 @@
 {
-  "panama-city": [],
-  "panama-canal": [],
+  "panama-city": [
+    "assets/img/tours/panama-city/portada.jpg",
+    "assets/img/tours/panama-city/calle-sombreros-casco.jpg",
+    "assets/img/tours/panama-city/carruaje-casco-antiguo.jpg",
+    "assets/img/tours/panama-city/interior-iglesia-casco.jpg",
+    "assets/img/tours/panama-city/palacio-de-gobierno.jpg",
+    "assets/img/tours/panama-city/trajes-tipicos-casco.jpg"
+  ],
+  "panama-canal": [
+    "assets/img/tours/panama-canal/portada.jpg",
+    "assets/img/tours/panama-canal/entrada-miraflores.jpg",
+    "assets/img/tours/panama-canal/esclusas-canal.jpg"
+  ],
   "cruceros": [],
-  "monkey-island": [],
+  "monkey-island": [
+    "assets/img/tours/monkey-island/portada.jpg",
+    "assets/img/tours/monkey-island/mono-en-bote.jpg",
+    "assets/img/tours/monkey-island/mono-interaccion-mano.jpg",
+    "assets/img/tours/monkey-island/mono-primer-plano.jpg",
+    "assets/img/tours/monkey-island/mono-sobre-palmas.jpg",
+    "assets/img/tours/monkey-island/monos-en-arbol.jpg",
+    "assets/img/tours/monkey-island/visitante-alimentando-mono-bote.jpg",
+    "assets/img/tours/monkey-island/visitante-observa-mono.jpg"
+  ],
   "san-lorenzo": [],
   "transfers": []
 }
