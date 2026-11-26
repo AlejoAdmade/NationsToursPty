@@ -47,3 +47,8 @@
 .lang-switch{background:#fff;color:#163842;border:1px solid #e2d8c2;border-radius:100px;padding:11px 15px;font-weight:800;cursor:pointer;min-width:48px}
 @media(max-width:850px){.package-grid,.destination-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.package-grid,.destination-grid{grid-template-columns:1fr}.package-card,.destination-card{padding:22px}.lang-switch{padding:9px 12px}}
+
+/* Payment logos: consistent rendering and sizing */
+.pay-logo{width:110px;max-width:100%;height:40px;display:flex;align-items:center;justify-content:center}
+.pay-logo img{display:block;width:auto;max-width:100%;height:auto;max-height:36px;object-fit:contain}
+@media(max-width:560px){.pay-logo img{max-height:32px}}

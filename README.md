@@ -55,3 +55,7 @@ Guarda los seis archivos **SVG** en `assets/img/pagos/`, respetando mayúsculas/
 - `efectivo.svg`
 
 Todas las secciones de pago del sitio ya apuntan a estas rutas locales; se eliminaron las URLs de Simple Icons. **Este ZIP no incluye los logos oficiales**: debes colocar tus seis SVG en esa carpeta para que aparezcan. El texto con el nombre de cada método de pago se mantiene visible si todavía falta algún logo. No cambies otros archivos HTML para actualizar las imágenes.
+
+
+## V0.10: logos de pago locales
+Se incluyen los seis SVG en `assets/img/pagos/`. Se utilizan rutas absolutas desde la raíz del sitio y ya no se ocultan ante errores ni usan lazy loading.
