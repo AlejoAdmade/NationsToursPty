@@ -21,3 +21,23 @@ Sitio estático multipágina, listo para subir a la raíz de GitHub Pages.
 
 ## Publicación
 Subir todos los archivos y carpetas a la raíz del repositorio GitHub Pages; conservar `.nojekyll`.
+
+
+## Fotos de los tours — carpetas automáticas (V0.8)
+
+Las fotos **no se escriben en el HTML**. Sube imágenes JPG/JPEG/PNG/WEBP/AVIF/GIF a la carpeta del tour correspondiente:
+
+- `assets/img/tours/panama-city/` — Panama City Tour
+- `assets/img/tours/panama-canal/` — Panama Canal Experience
+- `assets/img/tours/cruceros/` — Tours de cruceros
+- `assets/img/tours/monkey-island/` — Monkey Islands Tour
+- `assets/img/tours/san-lorenzo/` — Fuerte de San Lorenzo
+- `assets/img/tours/transfers/` — Traslados y servicio por hora
+
+**Cómo funciona:** al subir o borrar fotos en `main`, el workflow `.github/workflows/update-tour-photos.yml` genera automáticamente `assets/img/tours/manifest.json`. La página usa ese JSON para cargar portada (primera foto) y galería completa. El índice se guarda en la misma rama `main`, sin crear ramas nuevas.
+
+**Portada preferente:** llama a la foto principal `portada.webp`, `portada.jpg` o `portada.png`; si no existe, se usa la primera imagen en orden alfabético.
+
+**IMPORTANTE:** al reemplazar el ZIP, sube también `.github/workflows/update-tour-photos.yml` y `scripts/generate_tour_manifest.py`. Si GitHub no dispara el workflow al subir varios archivos desde la web, abre Actions → «Actualizar galerías de tours» → Run workflow. El workflow requiere Actions habilitado y permiso `GITHUB_TOKEN: contents write`. Como alternativa manual, ejecuta `python3 scripts/generate_tour_manifest.py`, sube el `manifest.json` resultante a GitHub y no necesitas Actions.
+
+Hasta que subas fotos, aparecerá una imagen neutra «Próximamente: fotografías oficiales», no fotos de otros lugares. El resto de la web se mantiene tal como estaba en V0.7.
