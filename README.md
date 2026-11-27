@@ -59,3 +59,15 @@ Todas las secciones de pago del sitio ya apuntan a estas rutas locales; se elimi
 
 ## V0.10: logos de pago locales
 Se incluyen los seis SVG en `assets/img/pagos/`. Se utilizan rutas absolutas desde la raíz del sitio y ya no se ocultan ante errores ni usan lazy loading.
+
+
+## V0.11: sitio completo en español e inglés
+
+- Selector ES/EN disponible en las diez páginas.
+- Traducción local sin APIs externas en `assets/js/i18n.js`.
+- Mantiene el idioma al navegar gracias a `localStorage`.
+- Incluye descripciones de los tours, tarifas informativas, formulario, contacto, navegación y mensajes de WhatsApp.
+- La versión española del HTML es la fuente editorial. Si se cambia un texto en español, actualizar su pareja equivalente en `i18n.js` para mantener la traducción.
+- Incluye el índice de fotos actualizado y las 17 fotos recibidas, más los logos de pago.
+- No se crea ninguna rama adicional. Descomprimir este ZIP en la raíz del repositorio y subirlo a `main`.
+- El idioma elegido modifica el título y la descripción de la página en el navegador. Para SEO bilingüe con indexación separada, será recomendable crear rutas `/en/` y etiquetas hreflang antes del lanzamiento definitivo.

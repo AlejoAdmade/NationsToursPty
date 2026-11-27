@@ -10,9 +10,11 @@
   const validPath = (slug, path) =>
     typeof path === 'string' && path.startsWith(`assets/img/tours/${slug}/`) &&
     !path.includes('..') && /\.(jpg|jpeg|png|webp|avif|gif)$/i.test(path);
-  const photoAlt = (slug, index) => `Nation Tours PTY - ${slug.replace(/-/g, ' ')} - fotografía ${index + 1}`;
+  const photoAlt = (slug, index) => `Nation Tours PTY - ${slug.replace(/-/g, ' ')} - ${document.documentElement.lang === 'en' ? 'photo' : 'fotografía'} ${index + 1}`;
 
+  let lastManifest = {};
   function render(manifest) {
+    lastManifest = manifest;
     const lists = {};
     for (const slug of validSlugs) {
       lists[slug] = Array.isArray(manifest?.[slug]) ? manifest[slug].filter(p => validPath(slug, p)) : [];
@@ -35,7 +37,7 @@
         slide.className = 'album-slide';
         const image = document.createElement('img');
         image.src = encodeURI(path);
-        image.alt = files.length ? photoAlt(slug, index) : 'Próximamente, fotografías oficiales';
+        image.alt = files.length ? photoAlt(slug, index) : (document.documentElement.lang === 'en' ? 'Official photos coming soon' : 'Próximamente, fotografías oficiales');
         image.loading = index ? 'lazy' : 'eager';
         image.onerror = () => { image.onerror = null; image.src = FALLBACK; };
         slide.appendChild(image);
@@ -46,6 +48,7 @@
       });
     });
   }
+  document.addEventListener('ntp:language-change', () => render(lastManifest));
   fetch(BASE, {cache: 'no-cache'})
     .then(r => { if (!r.ok) throw Error('Manifest HTTP ' + r.status); return r.json(); })
     .then(render)
