@@ -1,4 +1,4 @@
-/* Nation Tours PTY — ES/EN audited local translations (V0.11.1)
+/* Nation Tours PTY — ES/EN audited local translations (V0.11.3)
  * The Spanish HTML remains the source. English strings are served locally,
  * with no translator API, no paid services, and no page reload.
  */
@@ -89,7 +89,7 @@
   collect(document.body);
   collectAttributes();
   const switcher = document.querySelector('.lang-switch');
-  if (switcher) switcher.setAttribute('aria-label', 'Switch site language');
+  if (switcher) switcher.setAttribute('aria-label', 'Cambiar a inglés');
 
   const whatsappTranslations = {"Hola, quiero conocer sus tours":"Hello! I would like to learn about your tours.","Hola, quiero información sobre Nation Tours PTY KIDS":"Hello! I would like information about Nation Tours PTY KIDS.","Hola Nation Tours PTY, me interesa cotizar una experiencia":"Hello Nation Tours PTY! I would like a quote for an experience.","Hola, quiero información sobre Nation Tours PTY":"Hello! I would like information about Nation Tours PTY.","Hola, quiero consultar el tour de Canal y Fuerte de San Lorenzo":"Hello! I would like to inquire about the Panama Canal and Fort San Lorenzo tour.","Hola, quisiera información sobre Transfers y servicios por hora":"Hello! I would like information about transfers and hourly driver services.","Hola, quisiera cotizar Transfers y servicios por hora":"Hello! I would like a quote for transfers and hourly driver services.","Hola, quiero consultar el Monkey Island Tour y confirmar disponibilidad, precio e inclusiones.":"Hello! I would like information about the Monkey Island Tour and to confirm availability, price, and inclusions.","Hola, quiero consultar disponibilidad y condiciones de Monkey Island Tour":"Hello! I would like to check availability and conditions for the Monkey Island Tour.","Hola, quiero consultar el Panama City Tour y confirmar disponibilidad, precio e inclusiones.":"Hello! I would like information about the Panama City Tour and to confirm availability, price, and inclusions.","Hola, quiero consultar disponibilidad y condiciones de Panama City Tour":"Hello! I would like to check availability and conditions for the Panama City Tour.","Hola, quiero consultar el Panama Canal Experience y confirmar disponibilidad, precio e inclusiones.":"Hello! I would like information about the Panama Canal Experience and to confirm availability, price, and inclusions.","Hola, quiero consultar disponibilidad y condiciones de Panama Canal Experience":"Hello! I would like to check availability and conditions for the Panama Canal Experience.","Hola, quisiera información y disponibilidad sobre Panama Express Cruise Port Tour de Nation Tours PTY":"Hello! I would like information and availability for the Panama Express Cruise Port Tour.","Hola, quisiera información y disponibilidad sobre Canal Express Experience de Nation Tours PTY":"Hello! I would like information and availability for the Canal Express Experience.","Hola, quisiera información y disponibilidad sobre Panama City & Canal Experience desde cruceros de Nation Tours PTY":"Hello! I would like information and availability for the Panama City & Canal Experience from the cruise port.","Hola, quisiera información y disponibilidad sobre Complete Cultural Experience desde cruceros de Nation Tours PTY":"Hello! I would like information and availability for the Complete Cultural Experience from the cruise port.","Hola, quiero consultar tarifa e inclusiones de Tour Express desde el Puerto de Cruceros":"Hello! I would like to ask about pricing and inclusions for the Express Cruise Port Tour."};
   const whatsappLinks = [...document.querySelectorAll('a[href*="wa.me/"]')].map(link => {
@@ -113,13 +113,23 @@
     language = next === 'en' ? 'en' : 'es';
     document.documentElement.lang = language;
     textNodes.forEach(applyText);
+    // El título principal combina un nodo de texto, <br> y <em>.
+    // Traducir ambos fragmentos explícitamente evita cualquier coincidencia
+    // parcial del diccionario o variante de espacios del HTML.
+    const heroHeading = document.querySelector('.hero-copy h1');
+    if (heroHeading) {
+      const firstText = Array.from(heroHeading.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+      const emphasis = heroHeading.querySelector('em');
+      if (firstText) firstText.nodeValue = language === 'en' ? 'Experience Panama.' : 'Panamá se vive.';
+      if (emphasis) emphasis.textContent = language === 'en' ? 'Don’t just visit it.' : 'No solo se visita.';
+    }
     translateAttributes();
     translateWhatsappLinks();
     updateMeta();
     if (switcher) {
       switcher.textContent = language === 'en' ? 'ES' : 'EN';
-      switcher.setAttribute('aria-label', language === 'en' ? 'Cambiar a español' : 'Switch to English');
-      switcher.setAttribute('title', language === 'en' ? 'Ver en español' : 'Read in English');
+      switcher.setAttribute('aria-label', language === 'en' ? 'Switch to Spanish' : 'Cambiar a inglés');
+      switcher.setAttribute('title', language === 'en' ? 'View in Spanish' : 'Ver en inglés');
     }
     try { localStorage.setItem(KEY, language); } catch (_) {}
     document.dispatchEvent(new CustomEvent('ntp:language-change', {detail:{language}}));

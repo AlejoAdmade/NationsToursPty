@@ -10,7 +10,24 @@
   const validPath = (slug, path) =>
     typeof path === 'string' && path.startsWith(`assets/img/tours/${slug}/`) &&
     !path.includes('..') && /\.(jpg|jpeg|png|webp|avif|gif)$/i.test(path);
-  const photoAlt = (slug, index) => `Nation Tours PTY - ${slug.replace(/-/g, ' ')} - ${document.documentElement.lang === 'en' ? 'photo' : 'fotografía'} ${index + 1}`;
+  const currentLanguage = () => document.documentElement.lang === 'en' ? 'en' : 'es';
+  const photoAlt = (slug, index) => currentLanguage() === 'en'
+    ? `Nation Tours PTY - ${slug.replace(/-/g, ' ')} - photo ${index + 1}`
+    : `Nation Tours PTY - ${slug.replace(/-/g, ' ')} - fotografía ${index + 1}`;
+  const photoFallbackAlt = () => currentLanguage() === 'en'
+    ? 'Official photos coming soon' : 'Próximamente, fotografías oficiales';
+  function refreshPhotoDescriptions() {
+    document.querySelectorAll('img[data-tour-image]').forEach(image => {
+      const slug = image.dataset.tourImage;
+      if (image.dataset.tourHasPhoto === 'true') image.alt = photoAlt(slug, 0);
+    });
+    document.querySelectorAll('img[data-album-photo]').forEach(image => {
+      const slug = image.dataset.albumPhoto;
+      const index = Number(image.dataset.albumIndex || 0);
+      image.alt = image.dataset.albumFallback === 'true' ? photoFallbackAlt() : photoAlt(slug, index);
+    });
+  }
+  document.addEventListener('ntp:language-change', refreshPhotoDescriptions);
 
   let lastManifest = {};
   function render(manifest) {
@@ -23,6 +40,7 @@
       const slug = image.dataset.tourImage;
       const path = lists[slug]?.[0];
       image.src = path ? encodeURI(path) : FALLBACK;
+      image.dataset.tourHasPhoto = path ? 'true' : 'false';
       if (path) image.alt = photoAlt(slug, 0);
       image.onerror = () => { image.onerror = null; image.src = FALLBACK; };
     });
@@ -37,7 +55,10 @@
         slide.className = 'album-slide';
         const image = document.createElement('img');
         image.src = encodeURI(path);
-        image.alt = files.length ? photoAlt(slug, index) : (document.documentElement.lang === 'en' ? 'Official photos coming soon' : 'Próximamente, fotografías oficiales');
+        image.dataset.albumPhoto = slug;
+        image.dataset.albumIndex = String(index);
+        image.dataset.albumFallback = files.length ? 'false' : 'true';
+        image.alt = files.length ? photoAlt(slug, index) : photoFallbackAlt();
         image.loading = index ? 'lazy' : 'eager';
         image.onerror = () => { image.onerror = null; image.src = FALLBACK; };
         slide.appendChild(image);
@@ -48,7 +69,7 @@
       });
     });
   }
-  document.addEventListener('ntp:language-change', () => render(lastManifest));
+
   fetch(BASE, {cache: 'no-cache'})
     .then(r => { if (!r.ok) throw Error('Manifest HTTP ' + r.status); return r.json(); })
     .then(render)
